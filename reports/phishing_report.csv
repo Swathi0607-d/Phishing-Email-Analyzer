@@ -1,0 +1,4 @@
+File,From,Subject,Sender IP,Risk Score,Verdict,Keywords Found,Suspicious URLs,Spoofing Flags,Suspicious Attachments
+legitimate_github.eml,"""GitHub"" <noreply@github.com>",Your pull request was merged,192.30.252.1,0,SAFE,0,0,0,None
+phishing_bank.eml,"""Security Alert - HDFC Bank"" <security@hdfc-bank-verify.com>",URGENT: Your Account Has Been Suspended,192.168.66.201,100,HIGH RISK,8,1,2,.exe
+phishing_job.eml,"""HR - TCS"" <hr.recruitment@tcs-careers-india.net>",Congratulations! Selected for TCS - Reply Immediately,45.33.99.201,100,HIGH RISK,9,1,3,.zip

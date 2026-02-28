@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Phishing Email Analysis Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #6b7280;
+    --red: #ff4444;
+    --orange: #ff9900;
+    --green: #00cc44;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; padding: 40px 20px; }
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+  .header h1 span { color: var(--red); }
+  .header p { color: var(--muted); margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .stat .num { font-size: 2.5rem; font-weight: 800; }
+  .stat .label { color: var(--muted); font-size: 13px; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 40px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #1f2937; padding: 12px 16px; text-align: left; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; font-size: 11px; }
+  td { padding: 12px 16px; border-top: 1px solid var(--border); vertical-align: middle; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .badge { padding: 3px 10px; border-radius: 20px; color: white; font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .cards { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .card-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); }
+  .card-header h3 { font-size: 1rem; font-weight: 700; }
+  .card-body { padding: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .section h4 { font-size: 13px; color: var(--muted); margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 1px; }
+  .section p { font-size: 13px; margin-bottom: 6px; color: #94a3b8; word-break: break-all; }
+  .section p b { color: var(--text); }
+  .section ul { list-style: none; padding: 0; }
+  .section ul li { font-size: 12px; color: #94a3b8; padding: 3px 0; font-family: 'JetBrains Mono', monospace; border-bottom: 1px solid var(--border); word-break: break-all; }
+  h2 { max-width: 1100px; margin: 0 auto 20px; font-size: 1.2rem; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📧 Phishing <span>Email</span> Analyzer</h1>
+  <p>SOC L1 Portfolio Project — Generated 2026-02-28 22:54:32</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="num">3</div><div class="label">Emails Analyzed</div></div>
+  <div class="stat"><div class="num" style="color:#ff4444">2</div><div class="label">High Risk</div></div>
+  <div class="stat"><div class="num" style="color:#ff9900">0</div><div class="label">Suspicious</div></div>
+  <div class="stat"><div class="num" style="color:#00cc44">1</div><div class="label">Safe</div></div>
+</div>
+
+<h2>📊 Summary Table</h2>
+<div class="table-wrap">
+<table>
+  <thead><tr>
+    <th>File</th><th>From</th><th>Subject</th><th>Sender IP</th>
+    <th>Score</th><th>Verdict</th><th>Keywords</th><th>Susp. URLs</th><th>Spoofing</th>
+  </tr></thead>
+  <tbody>
+        <tr>
+            <td>legitimate_github.eml</td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">"GitHub" <noreply@github.com></td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">Your pull request was merged</td>
+            <td>192.30.252.1</td>
+            <td><b>0/100</b></td>
+            <td><span style="background:#00cc44;color:white;padding:3px 10px;border-radius:12px;font-size:12px">SAFE</span></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>phishing_bank.eml</td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">"Security Alert - HDFC Bank" <security@hdfc-bank-verify.com></td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">URGENT: Your Account Has Been Suspended</td>
+            <td>192.168.66.201</td>
+            <td><b>100/100</b></td>
+            <td><span style="background:#ff4444;color:white;padding:3px 10px;border-radius:12px;font-size:12px">HIGH RISK</span></td>
+            <td>8</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>phishing_job.eml</td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">"HR - TCS" <hr.recruitment@tcs-careers-india.net></td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">Congratulations! Selected for TCS - Reply Immediately</td>
+            <td>45.33.99.201</td>
+            <td><b>100/100</b></td>
+            <td><span style="background:#ff4444;color:white;padding:3px 10px;border-radius:12px;font-size:12px">HIGH RISK</span></td>
+            <td>9</td>
+            <td>1</td>
+            <td>3</td>
+        </tr></tbody>
+</table>
+</div>
+
+<h2>🔍 Detailed Analysis</h2>
+<div class="cards">
+        <div class="card">
+            <div class="card-header" style="border-left: 5px solid #00cc44">
+                <h3>📧 legitimate_github.eml</h3>
+                <span class="badge" style="background:#00cc44">SAFE — 0/100</span>
+            </div>
+            <div class="card-body">
+                <div class="grid">
+                    <div class="section">
+                        <h4>📋 Headers</h4>
+                        <p><b>From:</b> "GitHub" <noreply@github.com></p>
+                        <p><b>Subject:</b> Your pull request was merged</p>
+                        <p><b>Sender IP:</b> 192.30.252.1</p>
+                        <p><b>Reply-To:</b> noreply@github.com</p>
+                    </div>
+                    <div class="section">
+                        <h4>🔑 Keywords (0)</h4>
+                        <ul><li>None</li></ul>
+                    </div>
+                    <div class="section">
+                        <h4>🔗 Suspicious URLs (0)</h4>
+                        <ul><li>None</li></ul>
+                    </div>
+                    <div class="section">
+                        <h4>🕵️ Spoofing (0)</h4>
+                        <ul><li>None detected</li></ul>
+                        <h4>📎 Attachments</h4>
+                        <ul><li>None</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" style="border-left: 5px solid #ff4444">
+                <h3>📧 phishing_bank.eml</h3>
+                <span class="badge" style="background:#ff4444">HIGH RISK — 100/100</span>
+            </div>
+            <div class="card-body">
+                <div class="grid">
+                    <div class="section">
+                        <h4>📋 Headers</h4>
+                        <p><b>From:</b> "Security Alert - HDFC Bank" <security@hdfc-bank-verify.com></p>
+                        <p><b>Subject:</b> URGENT: Your Account Has Been Suspended</p>
+                        <p><b>Sender IP:</b> 192.168.66.201</p>
+                        <p><b>Reply-To:</b> noreply@hdfc-bank-verify.com</p>
+                    </div>
+                    <div class="section">
+                        <h4>🔑 Keywords (8)</h4>
+                        <ul><li>urgent</li><li>immediately</li><li>suspended</li><li>click here</li><li>security alert</li><li>otp</li><li>atm pin</li><li>login</li></ul>
+                    </div>
+                    <div class="section">
+                        <h4>🔗 Suspicious URLs (1)</h4>
+                        <ul><li>⚠️ http://hdfc-login-verify.xyz/secure/login... → Suspicious TLD: .xyz</li></ul>
+                    </div>
+                    <div class="section">
+                        <h4>🕵️ Spoofing (2)</h4>
+                        <ul><li>⚠️ Suspicious domain pattern '-verify' in hdfc-bank-verify.com</li><li>⚠️ Sent via bulk mailing tool: PHPMailer 5.2.0</li></ul>
+                        <h4>📎 Attachments</h4>
+                        <ul><li>⚠️ .exe</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" style="border-left: 5px solid #ff4444">
+                <h3>📧 phishing_job.eml</h3>
+                <span class="badge" style="background:#ff4444">HIGH RISK — 100/100</span>
+            </div>
+            <div class="card-body">
+                <div class="grid">
+                    <div class="section">
+                        <h4>📋 Headers</h4>
+                        <p><b>From:</b> "HR - TCS" <hr.recruitment@tcs-careers-india.net></p>
+                        <p><b>Subject:</b> Congratulations! Selected for TCS - Reply Immediately</p>
+                        <p><b>Sender IP:</b> 45.33.99.201</p>
+                        <p><b>Reply-To:</b> hr.tcs.india@gmail.com</p>
+                    </div>
+                    <div class="section">
+                        <h4>🔑 Keywords (9)</h4>
+                        <ul><li>urgent</li><li>immediately</li><li>act now</li><li>expire</li><li>congratulations</li><li>pay</li><li>registration fee</li><li>aadhar</li></ul>
+                    </div>
+                    <div class="section">
+                        <h4>🔗 Suspicious URLs (1)</h4>
+                        <ul><li>⚠️ http://tcs-payment-portal.xyz/pay... → Suspicious TLD: .xyz</li></ul>
+                    </div>
+                    <div class="section">
+                        <h4>🕵️ Spoofing (3)</h4>
+                        <ul><li>⚠️ Reply-To domain (gmail.com) differs from sender (tcs-careers-india.net)</li><li>⚠️ Suspicious domain pattern '-india.net' in tcs-careers-india.net</li><li>⚠️ Sent via bulk mailing tool: Bulk Mailer Pro 2.1</li></ul>
+                        <h4>📎 Attachments</h4>
+                        <ul><li>⚠️ .zip</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div></div>
+</body>
+</html>
